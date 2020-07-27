@@ -1,0 +1,36 @@
+ 
+              int echoPin = 10;// Echo Pin of the ultrasonic sensor
+              
+              int trigPin = 11;// Trigger Pin of the ultrasonic sensor
+              
+              unsigned long previoustime = 0;//This will be used to store the millisecnd value after each time the buzzer is triggered. This is used because delay function is not used for the buzzer timing.
+              
+              long distance;//Distance of the object from sensorlong echoTime;//Time taken for the echo
+              
+              int triggerAlarmDistance = 10;//Buzzer will be triggered if the distance is less than this value. (cm)
+
+              long timeinterval = 1000;
+void setup()
+{
+              pinMode(buzzerPin, OUTPUT);//Set pin modes 
+              
+              pinMode(echoPin, INPUT);
+              
+              pinMode(trigPin, OUTPUT);
+              
+              Serial.begin(9600);// the Serial port of Arduino baud rate. 
+              
+              delay(10);
+}void loop(){
+              digitalWrite(trigPin, LOW);//Set the trigger pin of the SR04 sensor to low 
+              digitalWrite(trigPin, HIGH);//Set the trigger pin of the SR04 sensor to high which will which will send a pulse.  
+              digitalWrite(trigPin, LOW);//Set the trigger pin of the SR04 sensor to low  
+              int echoTime = pulseIn(echoPin, HIGH);//Reads a pulse (either HIGH or LOW) on a pin. For example, if value is HIGH, pulseIn() waits for the pin to go HIGH, starts timing, then waits for the pin to go LOW and stops timing. Returns the length of the pulse in microseconds or 0 if no complete pulse was received within the timeout.                                              //https://www.arduino.cc/en/Reference/PulseIn                                          
+              distance = echoTime * 0.0340/2;
+if(distance <= triggerAlarmDistance)
+{
+              unsigned long currenttime = millis();
+              if (currenttime - previoustime >= val)
+              {
+                previoustime = currenttime;//Save current millisend value when the buzzer is triggered.      
+}
